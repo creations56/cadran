@@ -38,25 +38,9 @@ function getValue() {
 function boutonAppuye() {
   localisation.textContent="bouton appuyé";
   getLocation2();
-  //localisation.textContent= "Latitude ="+latitude+" , Longitude ="+longitude;  
-  //latitude_in.value=latitude;
-  //longitude_in.value=longitude;
 }
 
-function getLocation() {
-  function affectPosition(position) {
-  latitude= position.coords.latitude;
-  longitude= position.coords.longitude;
-  }
-  localisation.textContent="localisation impossible sur ce navigateur";
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(affectPosition);
-  } else { 
-    latitude= 0;
-    longitude= 0;
-    localisation.textContent  = "Geolocation is not supported by this browser.";
-  }
-}
+
 
 // alternative geolocalisation
 
