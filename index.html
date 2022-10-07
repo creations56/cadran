@@ -1,29 +1,32 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
+
+<head>
+  <meta charset="utf-8"> <!-- utilisation des caracteres accentues -->
+  <script src="script.js" defer ></script> <!-- lien vers le script javascript -->
+  <link href="style.css" rel="stylesheet"> <!-- lien vers la feuille CSS -->
+</head>
+
 <body>
+  
+<p><strong>Ceci est une demonstration des possibilités d'entrée / sortie en HTML , CSS , JAVASCRIPT</strong><br> 
+</p>
 
-<p>Click the button to get your coordinates.</p>
+<p>
+<div id="date1"></div>
+Date actuelle : <input type="text" id="date2" name="date2" value="0" /><br />
+</p>
 
-<button onclick="getLocation()">Try It</button>
+<p>
+<input type="text" placeholder="Entrez une valeur ici" id="in">
+<button type="button" onclick="getValue();">Récupérer la valeur</button>
 
-<p id="demo"></p>
-
-<script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
-
+<p>
+Latitude  : <input type="text" id="latitude" value="45.0" /><br />
+Longitude : <input type="text" id="longitude" value="0.0" /><br />
+<button id="bouton1">localisation automatique</button><br/>
+appuyer pour vous localiser en latitude et longitude<br /><br />
+<div id="localisation">latitude = , longitude =</div>
+</p>
+       
 </body>
-</html>
