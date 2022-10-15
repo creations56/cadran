@@ -119,6 +119,7 @@ function calculHSM() {
 }
 
 function calculHSV() {
+  // HSV=HSM−ΔT ou HSM=HSV+ΔT
   let nombreJours=0;
   let B=0;
   let deltaT=0; // delta T en minutes
@@ -128,16 +129,15 @@ function calculHSV() {
   let diffTemps = HL.getTime() - premierJanvier.getTime(); 
   nombreJours =  Math.floor(diffTemps / (1000 * 3600 * 24)+1); 
   B=2*Math.PI*(nombreJours-81)/365; 
-  deltaT=7,678*Math.sin(B+1,374)-9,87*Math.sin(2*B);
-  //alert("Le nombre de jours entre les deux dates est de " + diffJours);
-  //alert(premierJanvier)
+  deltaT=7.678*Math.sin(B+1.374)-9.87*Math.sin(2*B);
+  alert(B+" , "+deltaT);
   
-  decalageHSV=long/15-decalageHL+deltaT/60;//
+  decalageHSV=long/15-decalageHL-deltaT/60;//
   HSV.setTime(HL.getTime() + (decalageHSV*60*60*1000));
   let formatHeure=""; // variable locale
   heureHSV=HSV.getHours();
   minuteHSV=HSV.getMinutes();
-  formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn ";
+  formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn "+" ("+deltaT+" mn)";
   document.getElementById("l5").value=formatHeure;
 }
 
