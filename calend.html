@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Geolocation</title>
+<meta charset="UTF-8">
+<script src="calend.js"></script>
+<link href="calend.css" rel="stylesheet"> 
+</head>
+<body onload="initialisation()">
+
+<h1>heure</h1>
+ 
+<div style="overflow-x: auto;"><!-- Making the table responsive -->
+
+<table width="100%">
+
+<tr> <!-- ligne 1 -->
+<label>heure système (courante)</label><br />
+<textarea class="gris"name="name" rows="3" id="l1c1"></textarea><br />
+
+<label>heure UTC (fixe)</label><br />  
+<textarea name="name2" rows="1" id="l2"></textarea><br />
+
+<label>heure légale (fixe)</label><br />  
+<textarea name="name2" rows="2" id="l3"></textarea><br />
+
+<label>heure solaire moyenne (fixe)</label><br />  
+<textarea name="name" rows="1" id="l4"></textarea><br />
+</tr>
+
+<tr> <!-- ligne 4 -->
+<td width="100%">
+<label>heure solaire vraie (fixe)</label><br />  
+<textarea name="name2" rows="1" id="l5"></textarea>
+</td> 
+</tr>
+
+</tr width="100%"> <!-- ligne 5 -->
+<td width="100%">
+<label>coordonnées géographiques</label><br />  
+<div style="text-align:center"><textarea name="l3c1" rows="2" id="l3c1" >pas de donnée...</textarea><br /></div><br />
+</td>
+</tr width=> <!-- ligne 6 -->
+</table>
+
+<table width="100%">
+<tr>
+<td width="75%" style="text-align: right;">
+  <label>latitude (positive pour l'hémisphère nord): </label><br />
+  <label>longitude (positive à l'est de Greenwich) :</label>
+</td>
+<td width="25%" style="text-align: left;">
+<input type="number" name="texte" id="latM" maxlength="2" size="3" value=0 ><br />
+<input type="number" name="number" id="longM" maxlength="2" size="3" value=0> 
+</td> 
+</tr>
+</table>
+
+<table width="100%">
+<tr> <!-- ligne 7 -->
+
+<td width="100%">
+<button onClick="affichageCoord()">localisation automatique</button><br />
+<button onClick="validCoordManuel()">localisation manuelle</button><br />   
+</td> 
+</tr>
+</table>
+
+</div><!-- Making the table responsive -->
+</body>
+</html>
