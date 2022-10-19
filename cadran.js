@@ -14,6 +14,7 @@ const nbJoursMois_b = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 var lat=99;  // latitude
 var long=99; // longitude
+var latLong="non_actif"; // pas de valeurs lat long actifs
 // ne pas utiliser de variable pour les elements definis par id
 
 // ----------------------------------
@@ -98,9 +99,11 @@ function heureAuto() {
   decalageHL=-1*HL.getTimezoneOffset()/60;
   afficheDate();
   afficheHL();
+  calculUTC();
+  if (latLong=="actif"){
   calculHSV();
   calculHSM();
-  calculUTC();
+  }
 }
 
 // --------------------------------------
@@ -194,6 +197,7 @@ function successHandler(position)  {
   // Success Handler
   lat=position.coords.latitude;
   long=position.coords.longitude;
+  latLong="actif";
 }
 
 function errorHandler(positionError)  {
@@ -227,6 +231,7 @@ function validCoordManuel() {
   if (long>180) {long=180;}
   if (long<-180) {long=-180;}
   affichageLatLong();
+  latLong="actif";
 }
   
 // -------------------------------------------
