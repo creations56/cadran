@@ -1,0 +1,35 @@
+/* Valeurs dont la taille est absolue */
+body{
+	background-color:#bbbbbb;
+	text-align: center;
+	font-size: 30px;
+	touch-action: manipulation;/*supprime double touche pour zoomer*/
+}
+textarea {
+  width:80%;
+  margin-top:10px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 10px;
+}
+
+.gris{
+  background-color: #aaaaaa;
+  /*font-family: "Courier New", Courier, monospace; // pour alignement caracteres */
+  /*font-weight: bold;*/
+}
+
+button {
+  font-size: 30px;
+}
+label {
+  font-size: 30px;
+  font-weight: bold;
+}
+input {
+  font-size: 30px;
+  max-width: 120px;
+}
+.court {
+  max-width: 60px;
+}
