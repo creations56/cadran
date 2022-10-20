@@ -12,8 +12,8 @@ const nomMois = ['jan', 'fev', 'mars', 'avr', 'mai', 'juin', 'juil', 'aout', 'se
 const nbJoursMois = [31,28,31,30,31,30,31,31,30,31,30,31];
 const nbJoursMois_b = [31,29,31,30,31,30,31,31,30,31,30,31];
 
-var lat=99;  // latitude
-var long=99; // longitude
+var lat=0;  // latitude
+var long=0; // longitude
 var latLong="non_actif"; // pas de valeurs lat long actifs
 // ne pas utiliser de variable pour les elements definis par id
 
