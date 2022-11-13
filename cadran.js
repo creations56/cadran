@@ -141,6 +141,7 @@ function calculUTC() {
   let heureUTC=UTC.getHours();
   let minuteUTC=UTC.getMinutes();
   formatHeure=ajouteZero(heureUTC)+" H "+ajouteZero(minuteUTC)+" mn ";
+  alert(formatHeure);
   document.getElementById("idUTC").textContent=formatHeure;
 }
 
