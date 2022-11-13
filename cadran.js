@@ -103,7 +103,7 @@ function heureAuto() {
   calculHSV();
   calculHSM();
   }
-}
+
 
 // --------------------------------------
 // ----- affichage date et heures -------
@@ -201,8 +201,7 @@ function majAffichages() {
   calculUTC();
   affichageLatLong();
   calculHSM();
-  calculHSV();
-  
+  calculHSV(); 
 }
 
 
@@ -349,7 +348,5 @@ function setHLmanuelle() {
 function initialisation(){
   HL = new Date();
   decalageHL=-1*HL.getTimezoneOffset()/60;
-  afficheDate();
-  afficheHL();
-  calculUTC();
+  majAffichages();
 }
