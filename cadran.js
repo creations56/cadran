@@ -14,7 +14,7 @@ const nbJoursMois_b = [31,29,31,30,31,30,31,31,30,31,30,31];
 
 var lat=99;  // latitude non valide
 var long=0; // longitude
-var latLong="non_actif"; // pas de valeurs lat long actifs
+//var latLong="non_actif"; // pas de valeurs lat long actifs
 // ne pas utiliser de variable pour les elements definis par id
 
 // ----------------------------------
@@ -100,7 +100,6 @@ function heureAuto() {
   afficheDate();
   afficheHL();
   calculUTC();
-  if (latLong=="actif"){
   calculHSV();
   calculHSM();
   }
@@ -141,7 +140,6 @@ function calculUTC() {
   let heureUTC=UTC.getHours();
   let minuteUTC=UTC.getMinutes();
   formatHeure=ajouteZero(heureUTC)+" H "+ajouteZero(minuteUTC)+" mn ";
-  alert(formatHeure);
   document.getElementById("idUTC").textContent=formatHeure;
 }
 
