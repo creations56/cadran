@@ -12,7 +12,7 @@ const nomMois = ['jan', 'fev', 'mars', 'avr', 'mai', 'juin', 'juil', 'aout', 'se
 const nbJoursMois = [31,28,31,30,31,30,31,31,30,31,30,31];
 const nbJoursMois_b = [31,29,31,30,31,30,31,31,30,31,30,31];
 
-var lat=0;  // latitude
+var lat=99;  // latitude non valide
 var long=0; // longitude
 var latLong="non_actif"; // pas de valeurs lat long actifs
 // ne pas utiliser de variable pour les elements definis par id
@@ -128,8 +128,8 @@ function afficheHL(){
   let minuteHL=HL.getMinutes();
   //decalageHL=String(-1*HL.getTimezoneOffset()/60);
   if (decalageHL>0){decalageHL_texte="+"+decalageHL;};
-  formatHeure=ajouteZero(heureHL)+" H "+ajouteZero(minuteHL)+" mn"+"\n"+"GMT "+decalageHL_texte;
-  document.getElementById("l3").value=formatHeure;
+  formatHeure=ajouteZero(heureHL)+" H "+ajouteZero(minuteHL)+" mn"+" ("+"GMT "+decalageHL_texte+")";
+  document.getElementById("l3").textContent=formatHeure;
 }
 
 // ----- calcul heure solaire moyenne , heure solaire vraie, heure UTC ------
@@ -146,17 +146,24 @@ function calculUTC() {
 
 function calculHSM() {
   //ecartHeureLong=long/15+decalageHL;// ecart en heures lie a la longitude
+  let affichHSM="-- H -- mn";
   decalageHSM=long/15-decalageHL; 
   HSM.setTime(HL.getTime() + (decalageHSM*60*60*1000));
-  let formatHeure=""; // variable locale
+  let formatHeure="-- H -- mn"; // variable locale
   let heureHSM=HSM.getHours();
   let minuteHSM=HSM.getMinutes();
   formatHeure=ajouteZero(heureHSM)+" H "+ajouteZero(minuteHSM)+" mn ";
-  document.getElementById("idHSM").textContent=formatHeure;
+  if (lat!=99) {affichHSM=formatHeure};
+  document.getElementById("idHSM").textContent=affichHSM;
 }
 
 function calculHSV() {
   // calcul equation du temps , HSV=HSM−ΔT ou HSM=HSV+ΔT
+  // variables affichage
+  let affichET=String.fromCharCode(177)+" -- mn";
+  let affichHSV="-- H -- mn";
+  let affichMS="-- H -- mn";
+  // calcul equation du temps
   let nombreJours=0;
   let B=0;
   let deltaT=0; // delta T en minutes
@@ -165,7 +172,8 @@ function calculHSV() {
   nombreJours =  Math.floor(diffTemps / (1000 * 3600 * 24)+1); 
   B=2*Math.PI*(nombreJours-81)/365; 
   deltaT=7.678*Math.sin(B+1.374)-9.87*Math.sin(2*B);
-  document.getElementById("idET").textContent=Math.round(deltaT)+" mn";
+  if (lat!=99) {affichET=Math.round(deltaT)+" mn" }// -----
+  document.getElementById("idET").textContent=affichET;
   // calcul heure solaire vraie
   decalageHSV=long/15-decalageHL-deltaT/60;
   HSV.setTime(HL.getTime() + (decalageHSV*60*60*1000));
@@ -173,31 +181,49 @@ function calculHSV() {
   let heureHSV=HSV.getHours();
   let minuteHSV=HSV.getMinutes();
   formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn";
-  document.getElementById("l5").value=formatHeure;
+  if (lat!=99) {affichHSV=formatHeure }// -----
+  document.getElementById("l5").textContent=affichHSV;
   // calcul midi solaire
   //midiSolaire.setHours(12-decalageHSV);
   let midiSol=12-decalageHSV;
   let heureMidi= Math.floor(midiSol);
   let minuteMidi= Math.ceil(frac(midiSol)*60);
   formatHeureMidi=ajouteZero(heureMidi)+" H "+ajouteZero(minuteMidi)+" mn";
-  document.getElementById("idmidi").textContent=formatHeureMidi;
+  if (lat!=99) {affichMS=formatHeureMidi}// -----
+  document.getElementById("idmidi").textContent=affichMS;
 }
+
+// --------------------------------------
+// ---------- mise a jour affichages ----
+// --------------------------------------
+function majAffichages() {
+  afficheDate();
+  afficheHL();
+  calculUTC();
+  affichageLatLong();
+  calculHSM();
+  calculHSV();
+  
+}
+
 
 // --------------------------------------
 // ---------- geolocalisation -----------
 // --------------------------------------
 
 function affichageLatLong(){
-document.getElementById("idLatLong").textContent=formatNombre(lat) + "° , "+formatNombre(long)+"°";
-if (long!=999) {calculHSM();calculHSV();}
-else {document.getElementById("idLatLong").textContent="coordonnées non détectées";}
+if (lat!=99){
+document.getElementById("idLatLong").textContent=formatNombre(lat) + "° , "+formatNombre(long)+"°";}
+else {document.getElementById("idLatLong").textContent="coordonnées non détectées ou nulles";}
 }
 
 function successHandler(position)  {
   // Success Handler
   lat=position.coords.latitude;
   long=position.coords.longitude;
-  latLong="actif";
+  //if (lat!=0 || long!=0) {latLong="actif"};
+  //alert(latLong);
+  //latLong="actif";
 }
 
 function errorHandler(positionError)  {
@@ -214,15 +240,19 @@ function errorHandler(positionError)  {
 function miseEnAttente(){
   // appel d'affichage
   document.getElementById("idLatLong").textContent="en cours (environ 2 s)";
-    setTimeout(affichageLatLong, 2000); //On attend 5 secondes avant d'exécuter la fonction
+    setTimeout(majAffichages, 2000); //On attend 5 secondes avant d'exécuter la fonction
 }
 
+// validation coordonnees automatiques
 function affichageCoord()  {
   document.getElementById("idLatLong").textContent="en cours... (environ 2)";
   navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
+  lat=99; 
+  long=0;
   miseEnAttente();// if faut attendre que successHandler retourne les valeurs de lat et long
   }
-  
+
+// validation coordonnees manuelles 
 function validCoordManuel() {
   lat = document.getElementById("latM").value;
   long= document.getElementById("longM").value;
@@ -230,7 +260,7 @@ function validCoordManuel() {
   if (lat<-90) {lat=-90;}
   if (long>180) {long=180;}
   if (long<-180) {long=-180;}
-  affichageLatLong();
+  majAffichages();
   latLong="actif";
 }
   
@@ -238,6 +268,7 @@ function validCoordManuel() {
 // ---- definition date heure manuelle -------
 // -------------------------------------------
 
+// validation heure legale manuelle
 function setHLmanuelle() {
   // attention bien analyser dans l'ordre an, mois, jour
   
@@ -310,11 +341,7 @@ function setHLmanuelle() {
     document.getElementById("idGMT").value=GMTM0+""; // mise a jour input
     decalageHL=GMTM0;
   }
-  afficheDate();
-  afficheHL();
-  calculHSV();
-  calculHSM();
-  calculUTC();
+  majAffichages();
 }
  
 // -------------------------------------------

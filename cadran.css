@@ -1,6 +1,6 @@
 /* Valeurs dont la taille est absolue */
 body{
-	background-color:#bbbbbb;
+	background-color:#cfcfcf;
 	text-align: center;
 	font-size: 30px;
 	touch-action: manipulation;/*supprime double touche pour zoomer*/

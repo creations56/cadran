@@ -16,25 +16,40 @@
 <div style="overflow-x: auto;"><!-- Making the table responsive -->
 
 <table width="100%"> <!-- table 1-->
-
 <tr>
-<textarea class="gris"name="name" rows="1" id="idDate"></textarea><br />
+  <td width="50%" style="text-align: right;">Date :</td>
+  <td width="50%" style="text-align: left;"><span id="idDate"></span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Heure UTC :</td>
+  <td width="50%" style="text-align: left;"><span id="idUTC">-- H -- mn</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Heure légale :</td>
+  <td width="50%" style="text-align: left;"><span id="l3">-- H -- mn</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Heure solaire moyenne :</td>
+  <td width="50%" style="text-align: left;"><span id="idHSM">-- H -- mn</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Heure solaire vraie :</td>
+  <td width="50%" style="text-align: left;"><span id="l5">-- H -- mn</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Equation du temps :</td>
+  <td width="50%" style="text-align: left;"><span id="idET">&#177;-- mn</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">Heure légale du midi solaire :</td>
+  <td width="50%" style="text-align: left;"><span id="idmidi">-- H -- mn</span></td>
+</tr>
+</table>
 
-<label>heure légale</label><br />  
-<textarea name="name2" rows="2" id="l3"></textarea><br />
-heure UTC : <span id="idUTC">-- H -- mn</span><br />
+<table width="100%"> <!-- table 1-->
 <button onclick="heureAuto()">date/heure actualisation</button> 
 <button onClick="affichageCoord()">localisation automatique</button><br />
-
-<label>heure solaire vraie</label>
-<textarea rows="1" id="l5">-- H -- mn</textarea>
-<br />
-
-heure solaire moyenne : <span id="idHSM">-- H -- mn</span><br />
-
 lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br />
-"équation du temps" : <span id="idET">-- mn</span><br />
-midi solaire (en heure légale) : <span id="idmidi">-- H -- mn</span><br />
 <hr>
 
 </tr > <!-- ligne 6 -->
