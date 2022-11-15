@@ -1,4 +1,4 @@
-# cadran
+# CADRANS
 
 Cette page permet le calcul et l'affichage des différents temps , pour un lieu donné (défini par sa longitude):
 - le temps légal, composé d'une date (jour, mois, an), d'une heure (heure, minutes), et d'un fuseau horaire
