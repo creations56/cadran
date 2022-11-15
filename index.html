@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>cadran</title>
+<title>CADRANS</title>
 <meta charset="UTF-8">
 <!--
 <script src="//code.jquery.com/jquery-1.12.0.min.js">// bibliotheque jQuery
@@ -11,11 +11,14 @@
 </head>
 <body onload="initialisation()">
 
-<h2>cadran</h2>
- 
+<h2>CADRANS</h2>
+<hr />
 <div style="overflow-x: auto;"><!-- Making the table responsive -->
-
+  
 <table width="100%"> <!-- table 1-->
+<tr>
+<span class="titre">Heures</span>
+</tr>
 <tr>
   <td width="50%" style="text-align: right;">Date :</td>
   <td width="50%" style="text-align: left;"><span id="idDate"></span></td>
@@ -26,7 +29,7 @@
 </tr>
 <tr>
   <td width="50%" style="text-align: right;">Heure légale :</td>
-  <td width="50%" style="text-align: left;"><span id="l3">-- H -- mn</span></td>
+  <td width="50%" style="text-align: left;"><span id="idHL">-- H -- mn</span></td>
 </tr>
 <tr>
   <td width="50%" style="text-align: right;">Heure solaire moyenne :</td>
@@ -34,27 +37,35 @@
 </tr>
 <tr>
   <td width="50%" style="text-align: right;">Heure solaire vraie :</td>
-  <td width="50%" style="text-align: left;"><span id="l5">-- H -- mn</span></td>
+  <td width="50%" style="text-align: left;"><span id="idHSV">-- H -- mn</span></td>
 </tr>
 <tr>
   <td width="50%" style="text-align: right;">Equation du temps :</td>
   <td width="50%" style="text-align: left;"><span id="idET">&#177;-- mn</span></td>
 </tr>
+
+</table>
+
+<table width="100%"> <!-- table 1-->
 <tr>
-  <td width="50%" style="text-align: right;">Heure légale du midi solaire :</td>
+<button onclick="heureAuto()">date/heure actualisation</button> 
+<button onClick="affichageCoord()">localisation automatique</button><br />
+lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br />
+</tr > <!-- ligne 6 -->
+</table>
+
+<hr />
+<table width="100%">
+<tr>
+<span class="titre">Mouvements du Soleil (en heure légale)</span>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">midi solaire :</td>
   <td width="50%" style="text-align: left;"><span id="idmidi">-- H -- mn</span></td>
 </tr>
 </table>
 
-<table width="100%"> <!-- table 1-->
-<button onclick="heureAuto()">date/heure actualisation</button> 
-<button onClick="affichageCoord()">localisation automatique</button><br />
-lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br />
-<hr>
-
-</tr > <!-- ligne 6 -->
-</table>
-
+<hr />
 <table width="100%"><!-- table 2 -->
 <tr>
 <td width="50%" style="text-align: right;">
@@ -69,10 +80,8 @@ lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br 
 </table>
 
 <table width="100%">
-  
 <tr> <!-- ligne 7 -->
 <td width="100%">
-
 <button onClick="validCoordManuel()">localisation manuelle</button>  
 </td> 
 </tr>

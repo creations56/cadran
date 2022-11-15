@@ -6,7 +6,13 @@ var HSV=new Date(); // heure solaire vraie
 
 var decalageHL=0; // decalage heure UTC par rapport a HL
 var decalageHSM=0;// decalage heure HSM par rapport a HL
-var decalageHSV=0;// decalage heure HSV par rapport a HL
+var decalageHSV=0;// decalage heure HSV par rapport a HL, HL=HSV-decalageHSV
+
+var HLS=0; // heure du lever de soleil
+var HCS=0; // heure du coucher de soleil
+var ALS=0; // azimut au lever du soleil
+var ACS=0; // azimut au coucher du soleil
+var hautSolMidi=0; // hauteur du soleil a midi
 
 const nomMois = ['jan', 'fev', 'mars', 'avr', 'mai', 'juin', 'juil', 'aout', 'sept', 'oct','nov','dec'];
 const nbJoursMois = [31,28,31,30,31,30,31,31,30,31,30,31];
@@ -128,7 +134,7 @@ function afficheHL(){
   //decalageHL=String(-1*HL.getTimezoneOffset()/60);
   if (decalageHL>0){decalageHL_texte="+"+decalageHL;};
   formatHeure=ajouteZero(heureHL)+" H "+ajouteZero(minuteHL)+" mn"+" ("+"GMT "+decalageHL_texte+")";
-  document.getElementById("l3").textContent=formatHeure;
+  document.getElementById("idHL").textContent=formatHeure;
 }
 
 // ----- calcul heure solaire moyenne , heure solaire vraie, heure UTC ------
@@ -174,14 +180,14 @@ function calculHSV() {
   if (lat!=99) {affichET=Math.round(deltaT)+" mn" }// -----
   document.getElementById("idET").textContent=affichET;
   // calcul heure solaire vraie
-  decalageHSV=long/15-decalageHL-deltaT/60;
+  decalageHSV=long/15-decalageHL-deltaT/60; // HL=HSV-decalageHSV
   HSV.setTime(HL.getTime() + (decalageHSV*60*60*1000));
   let formatHeure=""; // variable locale
   let heureHSV=HSV.getHours();
   let minuteHSV=HSV.getMinutes();
   formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn";
   if (lat!=99) {affichHSV=formatHeure }// -----
-  document.getElementById("l5").textContent=affichHSV;
+  document.getElementById("idHSV").textContent=affichHSV;
   // calcul midi solaire
   //midiSolaire.setHours(12-decalageHSV);
   let midiSol=12-decalageHSV;
@@ -259,7 +265,7 @@ function validCoordManuel() {
   if (long>180) {long=180;}
   if (long<-180) {long=-180;}
   majAffichages();
-  latLong="actif";
+  //latLong="actif";
 }
   
 // -------------------------------------------
@@ -342,6 +348,13 @@ function setHLmanuelle() {
   majAffichages();
 }
  
+// -------------------------------------------
+// ----------- position du soleil ------------
+// -------------------------------------------
+
+
+
+
 // -------------------------------------------
 // ------------- initialisation --------------
 // -------------------------------------------

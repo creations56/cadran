@@ -2,9 +2,10 @@
 body{
 	background-color:#cfcfcf;
 	text-align: center;
-	font-size: 30px;
+	font-size: 32px;
 	touch-action: manipulation;/*supprime double touche pour zoomer*/
 }
+/*
 textarea {
   width:80%;
   margin-top:10px;
@@ -12,11 +13,20 @@ textarea {
   font-size: 30px;
   border-radius: 10px;
 }
-
+*/
 .gris{
   background-color: #aaaaaa;
   /*font-family: "Courier New", Courier, monospace; // pour alignement caracteres */
   /*font-weight: bold;*/
+}
+
+.titre{ border-radius: 5px; padding: 5px;font-weight: bold ; font-size: 32px;background-color: #bbbbbb ; color: #111111;}
+
+
+
+h2{
+  font-size: 35px;
+  font-weight: bold;
 }
 
 button {
