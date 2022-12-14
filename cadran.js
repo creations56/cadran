@@ -1,13 +1,21 @@
+  
+// voir point ci dessous ligne = 281
+//long=parseFloat(long,10); !!!!! pourquoi pas bon ?
+
+
 var HL=new Date(); // heure legale
 var UTC=new Date(); // heure UTC
 var HSM= new Date(); // heure solaire moyenne
 var HSV=new Date(); // heure solaire vraie
 //var midiSolaire=new Date(); // heure du midi solaire
 
+var nombreJours=0;// nbr de jours depuis le 1er janvier
+
 var decalageHL=0; // decalage heure UTC par rapport a HL
 var decalageHSM=0;// decalage heure HSM par rapport a HL
 var decalageHSV=0;// decalage heure HSV par rapport a HL, HL=HSV-decalageHSV
 
+//var decSol=0; // declinaison du Soleil
 var HLS=0; // heure du lever de soleil
 var HCS=0; // heure du coucher de soleil
 var ALS=0; // azimut au lever du soleil
@@ -31,7 +39,7 @@ function formatNombre(x) {
   // format le nombre x et retourne une chaine formatee
   // ajoute un plus devant le nombre si positif
   let av=2; // nombre de chiffres avant le point
-  let ap=3; // nombre de chiffres apres le poiny
+  let ap=3; // nombre de chiffres apres le point
   let pos=0; // position du point dans la chaine
   let valeur=x*1; // enleve les zero residuels ?
   let multi=10**ap;
@@ -77,6 +85,13 @@ function arrondi(x) {
   // arrondi a 3 decimales
   y=Math.round(x*1000)/1000;
   y=addZeroes(y);// ajoute des zeros si besoin
+  return y;
+}
+
+function arrondi1(x) {
+  // arrondi a 1 decimales
+  y=Math.round(x*10)/10;
+  //y=addZeroes(y);// ajoute des zeros si besoin
   return y;
 }
 
@@ -137,6 +152,11 @@ function afficheHL(){
   document.getElementById("idHL").textContent=formatHeure;
 }
 
+// --- afiche coordoneees solaire
+function afficheSol() {
+  
+}
+
 // ----- calcul heure solaire moyenne , heure solaire vraie, heure UTC ------
 
 function calculUTC() {
@@ -169,7 +189,7 @@ function calculHSV() {
   let affichHSV="-- H -- mn";
   let affichMS="-- H -- mn";
   // calcul equation du temps
-  let nombreJours=0;
+  nombreJours=0;// raz nbr de jours depuis le 1er janvier
   let B=0;
   let deltaT=0; // delta T en minutes
   let premierJanvier= new Date(HL.getFullYear(),0,1,0);// premier janvier
@@ -188,12 +208,13 @@ function calculHSV() {
   formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn";
   if (lat!=99) {affichHSV=formatHeure }// -----
   document.getElementById("idHSV").textContent=affichHSV;
-  // calcul midi solaire
+  // calcul midi solaire 
   //midiSolaire.setHours(12-decalageHSV);
+  //if (lat!=99) {declinaisonSol();} // calcul de la hauteur du soleil
   let midiSol=12-decalageHSV;
   let heureMidi= Math.floor(midiSol);
   let minuteMidi= Math.ceil(frac(midiSol)*60);
-  formatHeureMidi=ajouteZero(heureMidi)+" H "+ajouteZero(minuteMidi)+" mn";
+  formatHeureMidi=ajouteZero(heureMidi)+" H "+ajouteZero(minuteMidi);
   if (lat!=99) {affichMS=formatHeureMidi}// -----
   document.getElementById("idmidi").textContent=affichMS;
 }
@@ -208,6 +229,8 @@ function majAffichages() {
   affichageLatLong();
   calculHSM();
   calculHSV(); 
+  declinaisonSol();
+  afficheSol();
 }
 
 
@@ -217,7 +240,7 @@ function majAffichages() {
 
 function affichageLatLong(){
 if (lat!=99){
-document.getElementById("idLatLong").textContent=formatNombre(lat) + "° , "+formatNombre(long)+"°";}
+document.getElementById("idLatLong").textContent="lat = "+formatNombre(lat) + "° , "+"long = "+formatNombre(long)+"°";}
 else {document.getElementById("idLatLong").textContent="coordonnées non détectées ou nulles";}
 }
 
@@ -243,7 +266,7 @@ function errorHandler(positionError)  {
 
 function miseEnAttente(){
   // appel d'affichage
-  document.getElementById("idLatLong").textContent="en cours (environ 2 s)";
+  document.getElementById("idLatLong").textContent="localisation en cours (environ 2 s)";
     setTimeout(majAffichages, 2000); //On attend 5 secondes avant d'exécuter la fonction
 }
 
@@ -260,6 +283,9 @@ function affichageCoord()  {
 function validCoordManuel() {
   lat = document.getElementById("latM").value;
   long= document.getElementById("longM").value;
+  //lat=parseFloat(lat, 10);
+  lat=lat*1;
+  long=long*1;
   if (lat>90) {lat=90;}
   if (lat<-90) {lat=-90;}
   if (long>180) {long=180;}
@@ -352,7 +378,53 @@ function setHLmanuelle() {
 // ----------- position du soleil ------------
 // -------------------------------------------
 
+function declinaisonSol() {
+// calcul la declinaison, la hauteur, l'azimut et les heures de lever et coucher su Soleil
+// utiliser HSV() avant cette fonction, pour que nombreJours soit calcule
 
+let A=0;
+let decSol=0;
+let formatHautSol=", haut= --°";
+let formatLeverSol="-- H -- mn , az= -- °";
+let formatCoucherSol="-- H -- mn , az= -- °";
+let ecartAngulaire=0;
+let azLever=0;
+let azCoucher=0;
+
+if (lat<=90){ // si lat inconnue alors lat=99
+// declinaison
+// Dec = arcsin ( sin (23,45 / 180 * pi) x sin ( 2 x pi / 365,25 x (J-81)))
+let B=(2*Math.PI/365.25*(nombreJours-81));
+A=Math.sin(23.45/180*Math.PI)*Math.sin(2*Math.PI/365.25*(nombreJours-81));
+decSol=Math.asin(A);// declinaison en radians
+// hauteur soleil a midi
+hautSolMidi=arrondi1(90-lat+(decSol/Math.PI*180));
+formatHautSol=", haut="+hautSolMidi+"°";
+// ecart angulaire lever/ coucher
+// EA = arccos ( -sin( Dec ) / cos (Lat) )
+ecartAngulaire=Math.acos(-Math.sin(decSol)/Math.cos(lat/180*Math.PI));// rd
+alert(ecartAngulaire);// --------------
+azLever= Math.round(180-ecartAngulaire/Math.PI*180);
+azCoucher= Math.round(180+ecartAngulaire/Math.PI*180);
+// heure de coucher et de lever
+//A2= arccos ( -tan ( Lat) x tan ( Dec)     en radians 
+//DJ = A / pi x 180 /15 x2 en heures
+let A2=Math.acos(-Math.tan(lat/180*Math.PI)*Math.tan(decSol));
+let dureeJour=A2/Math.PI*180/15*2; // heures decimales
+hdLever=12-decalageHSV-dureeJour/2; // heure locale decimale
+hdCoucher=12-decalageHSV+dureeJour/2; // heure locale decimale
+formatLeverSol=Math.floor(hdLever)+" H "+Math.round(frac(hdLever)*60)+" mn , az= "+azLever+" °";
+formatCoucherSol=Math.floor(hdCoucher)+" H "+Math.round(frac(hdCoucher)*60)+" mn , az= "+azCoucher+" °";
+}
+
+else {
+  formatHautSol=", haut= --°"; // ?
+}
+
+document.getElementById("idmidi2").textContent=formatHautSol;
+document.getElementById("idHLS").textContent=formatLeverSol;
+document.getElementById("idHCS").textContent=formatCoucherSol;
+}
 
 
 // -------------------------------------------

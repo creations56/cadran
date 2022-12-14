@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>cadran</title>
+    <title>cadrans</title>
     
 <style>
 body {
@@ -31,19 +31,25 @@ em{
 <body>
   
 <div class="centered">
-<h2>informations sur l'utilisation de la page "cadran"</h2>
+<h2>informations sur l'utilisation de la page "CADRANS"</h2>
 <br /><br />
-<a href="index.html">retour vers la page "cadran"</a>
+<a href="index.html">retour vers la page "CADRANS"</a>
 </div>
 
 <div class='left'>
 <br />
-la page "cadran" calcule et affiche les différents temps accessibles en un lieu donné:
+La page "CADRANS" calcule et affiche les différents temps accessibles en un lieu donné:
 <ul>
   <li><b>le temps légal</b>, composé d'une date (jour, mois, an), d'une heure (heure, minutes), et d'un fuseau horaire</li>
   <li><b>le temps UTC</b> "temps universel coordonné", qui est quasiment le temps solaire moyen du méridien de Greenwich<sup>1</sup></li>
   <li><b>le temps solaire moyen</b> du lieu tel que défini par sa longitude</li>
   <li><b>le temps solaire vrai du lieu</b> tel que défini par le temps solaire moyen du lieu et "l'équation du temps"</li>
+</ul>
+Cette page calcule et affiche egalement les element suivants liees aux positions du Soleil:
+<ul>
+  <li><b>midi solaire</b>, heure légale du midi solaire, et hauteur du Soleil a ce moment</li>
+  <li><b>lever du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment </li>
+  <li><b>coucher du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment</li>
 </ul>
 </div>
 <div>
@@ -68,7 +74,7 @@ Une zone en fin de page permet de rentrer manuellement une date. Cela permet not
   Pour plusieurs raisons, la rotation de la Terre autour du Soleil ne se fait pas à vitesse constante. Cela fait que, si la durée du jour est bien <i>en moyenne</i> de 24H, elle varie au cours de l'année, d'environ &#177;16 mn. La formule qui permet de calculer cette variation pour un jour donné s'appelle <b>"équation du temps"</b><br />
   Afin de faire correspondre le <i>temps des horloges</i> qui est "parfaitement" régulier <sup>2</sup>, avec ce <i>temps de la Terre</i>, qui varie, on a défini un <b>temps solaire moyen</b> qui est le temps solaire d’un lieu, correspondant à des journées solaire fictives régulières de 24h. Ce "temps solaire moyen" est à la base du système de temps "GMT", le temps solaire moyen sur le méridien de Greenwich.
   <br />
-  Toujours du fait le l’irrégularité de la rotation de la Terre autour du Soleil, l'heure légale à laquelle, en un lieu donné, un cadran solaire indique midi, est variable au cours de l'année (d'environ &#177;16 mn comme précédemment indiqué). Cette <b>heure légale du midi solaire</b> est indiquée sur la page "Cadran".On pourra expérimenter sa variation au cours de l'année en faisant varier la date manuellement.
+  Toujours du fait le l’irrégularité de la rotation de la Terre autour du Soleil, l'heure légale à laquelle, en un lieu donné, un cadran solaire indique midi, est variable au cours de l'année (d'environ &#177;16 mn comme précédemment indiqué). Cette <b>heure légale du midi solaire</b> est indiquée sur la page "CADRANS". On pourra expérimenter sa variation au cours de l'année en faisant varier la date manuellement.
 </div>
 <div>
 Pour plus d'information sur les différents temps vous pouvez consulter la page wikipedia consacrée au   <a href="https://fr.m.wikipedia.org/wiki/Temps_solaire#:~:text=Le%20temps%20solaire%20moyen%20est,au%20cours%20de%20la%20journée.">temps solaire</a> et celle consacrée à <a href="https://fr.m.wikipedia.org/wiki/%C3%89quation_du_temps">l'équation du temps</a>
@@ -79,6 +85,9 @@ Pour plus d'information sur les différents temps vous pouvez consulter la page 
 <hr />
 (1) le temps UTC et le temps solaire moyen de Greenwich peuvent se décaler d'une seconde. Un ajustement du temps UTC est régulierement fait pour le resynchroniser avec le temps GMT.<br />
 (2) cette régularité impressionante est permise par l'utilisation des horloges atomiques.
+
+<br />
+version 11/22
 
 </div>
 </body>

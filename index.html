@@ -8,7 +8,7 @@
 </head>
 <body onload="initialisation()">
 
-<h2>CADRANS</h2>
+<h2>- C A D R A N S -</h2>
 <hr />
 <div style="overflow-x: auto;"><!-- Making the table responsive -->
   
@@ -46,7 +46,7 @@
 <tr>
 <button onclick="heureAuto()">date/heure actualisation</button> 
 <button onClick="affichageCoord()">localisation automatique</button><br />
-lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br />
+<span id="idLatLong">lat = &#177;--.--- ° , long = &#177;--.--- °</span><br />
 </tr > <!-- ligne 6 -->
 </table>
 
@@ -57,12 +57,23 @@ lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br 
 </tr>
 <tr>
   <td width="50%" style="text-align: right;">midi solaire :</td>
-  <td width="50%" style="text-align: left;"><span id="idmidi">-- H -- mn</span></td>
+  <td width="50%" style="text-align: left;"><span id="idmidi">-- H -- mn,</span><span id="idmidi2"> haut= -- °</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">lever du Soleil :</td>
+  <td width="50%" style="text-align: left;"><span id="idHLS">-- H -- mn , az= -- °</span></td>
+</tr>
+<tr>
+  <td width="50%" style="text-align: right;">coucher du Soleil :</td>
+  <td width="50%" style="text-align: left;"><span id="idHCS">-- H -- mn , az= -- °</span></td>
 </tr>
 </table>
 
 <hr />
 <table width="100%"><!-- table 2 -->
+<tr>
+<span class="titre">Entrées manuelles des valeurs</span>
+</tr>
 <tr>
 <td width="50%" style="text-align: right;">
   latitude (+ nord , - sud): <br />
@@ -83,7 +94,6 @@ lat. , long. : <span id="idLatLong">&#177;--.--- ° , &#177;--.--- °</span><br 
 </tr>
 </table>
 
-<hr />
 <table>
 <tr>
 jour : <input class="court" type="text" id="idjour" maxlength="2" placeholder="00" >
@@ -97,8 +107,8 @@ minute : <input class="court" type="text" id="idminute" maxlength="2" size="3" p
 </tr>
 </table>
 
+<hr />
 </div><!-- Making the table responsive -->
-<br />
 <a href="informations.html">informations complémentaires</a>
 </body>
 </html>
