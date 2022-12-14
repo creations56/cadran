@@ -401,7 +401,7 @@ decSol=Math.asin(A);// declinaison en radians
 hautSolMidi=arrondi1(90-lat+(decSol/Math.PI*180));
 formatHautSol=", haut="+hautSolMidi+"°";
 // ecart angulaire lever/ coucher
-// EA = arccos ( -sin( Dec ) / cos (Lat) )
+// EA = arccos ( -sin( Dec ) / cos (Lat) ) 
 ecartAngulaire=Math.acos(-Math.sin(decSol)/Math.cos(lat/180*Math.PI));// rd
 alert(ecartAngulaire);// --------------
 azLever= Math.round(180-ecartAngulaire/Math.PI*180);
