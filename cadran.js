@@ -403,7 +403,7 @@ formatHautSol=", haut="+hautSolMidi+"°";
 // ecart angulaire lever/ coucher
 // EA = arccos ( -sin( Dec ) / cos (Lat) ) 
 ecartAngulaire=Math.acos(-Math.sin(decSol)/Math.cos(lat/180*Math.PI));// rd
-alert(ecartAngulaire);// --------------
+//alert(ecartAngulaire);// --------------
 azLever= Math.round(180-ecartAngulaire/Math.PI*180);
 azCoucher= Math.round(180+ecartAngulaire/Math.PI*180);
 // heure de coucher et de lever
