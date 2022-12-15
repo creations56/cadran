@@ -10,7 +10,7 @@ La page "CADRANS" calcule et affiche les différents temps accessibles en un lie
   <li><b>le temps solaire vrai du lieu</b> tel que défini par le temps solaire moyen du lieu et "l'équation du temps"</li>
 </ul>
 
-Cette page calcule et affiche également les élément suivants liés aux positions du Soleil:
+Cette page calcule et affiche également les éléments suivants liés aux positions du Soleil:
 <ul>
   <li><b>midi solaire</b>, heure légale du midi solaire, et hauteur du Soleil à ce moment</li>
   <li><b>lever du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment </li>
