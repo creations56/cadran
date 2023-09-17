@@ -21,6 +21,7 @@ var HCS=0; // heure du coucher de soleil
 var ALS=0; // azimut au lever du soleil
 var ACS=0; // azimut au coucher du soleil
 var hautSolMidi=0; // hauteur du soleil a midi
+var HSVangulaire=0;// heure solaire vraie angulaire
 
 const nomMois = ['jan', 'fev', 'mars', 'avr', 'mai', 'juin', 'juil', 'aout', 'sept', 'oct','nov','dec'];
 const nbJoursMois = [31,28,31,30,31,30,31,31,30,31,30,31];
@@ -123,6 +124,7 @@ function heureAuto() {
   calculUTC();
   calculHSV();
   calculHSM();
+  declinaisonSol();
   }
 
 
@@ -206,6 +208,7 @@ function calculHSV() {
   let heureHSV=HSV.getHours();
   let minuteHSV=HSV.getMinutes();
   formatHeure=ajouteZero(heureHSV)+" H "+ajouteZero(minuteHSV)+" mn";
+  HSVangulaire=180*((heureHSV+(minuteHSV/60))/12-1); // heure vraie angulaire
   if (lat!=99) {affichHSV=formatHeure }// -----
   document.getElementById("idHSV").textContent=affichHSV;
   // calcul midi solaire 
@@ -387,9 +390,13 @@ let decSol=0;
 let formatHautSol=", haut= --°";
 let formatLeverSol="-- H -- mn , az= -- °";
 let formatCoucherSol="-- H -- mn , az= -- °";
+let formatPosSol="haut= --°, az= -- °";
 let ecartAngulaire=0;
 let azLever=0;
 let azCoucher=0;
+//let Ah=0; // temps solaire vrai ??????
+let hautSolHeure=0; // hauteur soleil a heure vraie
+let azSolHeure=0; // azimut soleil a heure vraie
 
 if (lat<=90){ // si lat inconnue alors lat=99
 // declinaison
@@ -397,9 +404,16 @@ if (lat<=90){ // si lat inconnue alors lat=99
 let B=(2*Math.PI/365.25*(nombreJours-81));
 A=Math.sin(23.45/180*Math.PI)*Math.sin(2*Math.PI/365.25*(nombreJours-81));
 decSol=Math.asin(A);// declinaison en radians
+// .....
 // hauteur soleil a midi
-hautSolMidi=arrondi1(90-lat+(decSol/Math.PI*180));
+hautSolMidi=Math.round(90-lat+(decSol/Math.PI*180));// modifier 
 formatHautSol=", haut="+hautSolMidi+"°";
+// .....
+// azimut et hauteur soleil a heure vraie
+hautSolHeure= Math.asin(Math.sin((lat/180*Math.PI)*Math.sin(decSol/180*Math.PI))+Math.cos(lat/180*Math.PI)*Math.cos(decSol/180*Math.PI)*Math.cos(HSVangulaire/180*Math.PI)); // valeur en rd
+azSolHeure= Math.asin(Math.cos(decSol/180*Math.PI)*Math.sin(HSVangulaire/180*Math.PI)/Math.cos(hautSolHeure));
+formatPosSol=" haut= "+Math.round(hautSolHeure/Math.PI*180)+"° , az="+ Math.round(azSolHeure/Math.PI*180+180)+" °";
+///......
 // ecart angulaire lever/ coucher
 // EA = arccos ( -sin( Dec ) / cos (Lat) ) 
 ecartAngulaire=Math.acos(-Math.sin(decSol)/Math.cos(lat/180*Math.PI));// rd
@@ -424,6 +438,7 @@ else {
 document.getElementById("idmidi2").textContent=formatHautSol;
 document.getElementById("idHLS").textContent=formatLeverSol;
 document.getElementById("idHCS").textContent=formatCoucherSol;
+document.getElementById("idHSVang").textContent=formatPosSol;
 }
 
 
