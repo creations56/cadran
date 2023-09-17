@@ -12,6 +12,7 @@ La page "CADRANS" calcule et affiche les différents temps accessibles en un lie
 
 Cette page calcule et affiche également les éléments suivants liés aux positions du Soleil:
 <ul>
+   <li><b>position soleil actuel</b> :	hauteur et azimut du Soleil à l'heure courante affichée, et au lieu affiché </li>
   <li><b>midi solaire</b>, heure légale du midi solaire, et hauteur du Soleil à ce moment</li>
   <li><b>lever du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment </li>
   <li><b>coucher du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment</li>
