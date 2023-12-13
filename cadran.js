@@ -1,4 +1,12 @@
-  
+//   cadran 
+// version 09/23 
+
+// version 09/23 vs 11/22 :ajout calcul hauteur et azimut Soleil a l'heure courante
+
+
+// attention petit ecart possible entre hauteur du soleil a midi, et hauteur courante du Soleil pour l'heure courante de midi solaire vrai.
+
+
 // voir point ci dessous ligne = 281
 //long=parseFloat(long,10); !!!!! pourquoi pas bon ?
 
@@ -382,8 +390,8 @@ function setHLmanuelle() {
 // -------------------------------------------
 
 function declinaisonSol() {
-// calcul la declinaison, la hauteur, l'azimut et les heures de lever et coucher su Soleil
-// utiliser HSV() avant cette fonction, pour que nombreJours soit calcule
+// calcul la declinaison, la hauteur, l'azimut et les heures de lever et coucher du Soleil
+// utiliser HSV() avant cette fonction, pour que nombreJours soit calculé
 
 let A=0;
 let decSol=0;
@@ -399,18 +407,21 @@ let hautSolHeure=0; // hauteur soleil a heure vraie
 let azSolHeure=0; // azimut soleil a heure vraie
 
 if (lat<=90){ // si lat inconnue alors lat=99
+// .....
 // declinaison
 // Dec = arcsin ( sin (23,45 / 180 * pi) x sin ( 2 x pi / 365,25 x (J-81)))
 let B=(2*Math.PI/365.25*(nombreJours-81));
 A=Math.sin(23.45/180*Math.PI)*Math.sin(2*Math.PI/365.25*(nombreJours-81));
 decSol=Math.asin(A);// declinaison en radians
+alert(decSol); // ...........temporaire ..........
 // .....
-// hauteur soleil a midi
+// hauteur soleil à midi
 hautSolMidi=Math.round(90-lat+(decSol/Math.PI*180));// modifier 
 formatHautSol=", haut="+hautSolMidi+"°";
 // .....
 // azimut et hauteur soleil a heure vraie
-hautSolHeure= Math.asin(Math.sin((lat/180*Math.PI)*Math.sin(decSol/180*Math.PI))+Math.cos(lat/180*Math.PI)*Math.cos(decSol/180*Math.PI)*Math.cos(HSVangulaire/180*Math.PI)); // valeur en rd
+hautSolHeure= Math.asin(Math.sin(lat/180*Math.PI)*Math.sin(decSol)+Math.cos(lat/180*Math.PI)*Math.cos(decSol)*Math.cos(HSVangulaire/180*Math.PI)); // attention decSol est deja en fd. hautSolHeure en rd
+
 azSolHeure= Math.asin(Math.cos(decSol/180*Math.PI)*Math.sin(HSVangulaire/180*Math.PI)/Math.cos(hautSolHeure));
 formatPosSol=" haut= "+Math.round(hautSolHeure/Math.PI*180)+"° , az="+ Math.round(azSolHeure/Math.PI*180+180)+" °";
 ///......
