@@ -1,0 +1,37 @@
+/* Valeurs dont la taille est absolue */
+body{
+	background-color:#cfcfcf;
+	text-align: center;
+	font-size: 25px;
+	touch-action: manipulation;/*supprime double touche pour zoomer*/
+}
+
+.gris{
+  background-color: #aaaaaa;
+  /*font-family: "Courier New", Courier, monospace; // pour alignement caracteres */
+  /*font-weight: bold;*/
+}
+
+.titre{ border-radius: 5px; padding: 5px;font-weight: bold ; font-size: 32px;background-color: #bbbbbb ; color: #111111;}
+
+
+
+h2{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+button {
+  font-size: 25px;
+}
+label {
+  font-size: 25px;
+  font-weight: bold;
+}
+input {
+  font-size: 20px;
+  max-width: 120px;
+}
+.court {
+  max-width: 60px;
+}
