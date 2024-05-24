@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CADRANS</title>
+<meta charset="UTF-8">
+<script src="cadran.js"></script>
+<link href="cadran.css" rel="stylesheet"> 
+</head>
+<body onload="initialisation()">
+
+<h2>- C A D R A N S -</h2>
+<hr />
+<div style="overflow-x: auto;"><!-- Making the table responsive -->
+
+<!--          table 1         -->
+
+
+<span class="titre">Heures</span><br />
+<br />
+<span id="idDate" class="gras">date</span>
+
+<table width="100%" border="1px">
+<tr>
+  <td width="50%" style="text-align: center;"><span id="idUTC" class="grand">-- H -- mn</span><br />UTC </td>
+ <td width="50%" style="text-align: center;"><span id="idHL" class="grand">-- H -- mn</span><br />Légale</td>
+</tr>
+</table>
+
+<span class="petit">décalage GMT : <span id="idGMT">0</span></span><br />
+<span class="petit">Heure solaire moyenne / Heure légale : <span id="idDecHSM">0</span></span><br />
+
+<table width="100%" border="1px">
+<tr>
+  <td width="50%" style="text-align: center;"><span id="idHSM" class="grand">-- H -- mn</span><br />Solaire moyenne</td>
+  <td width="50%" style="text-align: center;"><span id="idHSV" class="grand">-- H -- mn</span><br />Solaire vraie</td>
+</tr>
+</table>
+<span class="petit">équation du temps : <span id="idET">&#177;-- mn</span></span><br /><br />
+<button onClick="affichageCoord()">localisation automatique</button><br />
+<span id="idLatLong" class="petit">lat = &#177;--.--- ° , long = &#177;--.--- °</span><br /><br />
+<button onclick="heureAuto()">temps réel/figé</button><br />
+<span class="petit" id="heureReelle">temps réel</span><br /><br />
+
+<hr />
+
+<span class="titre">Mouvements du Soleil <br />(en heure légale)</span><br /><br />
+
+<table width="100%" border="1px">
+<tr>
+ <td width="35%" style="text-align: center;"></td>
+ <td width="25%" style="text-align: center;">Heure</td>
+ <td width="20%" style="text-align: center;">hauteur</td>
+ <td width="20%" style="text-align: center;">azimut</td>
+</tr>
+<tr>
+ <td width="35%" style="text-align: center;">heure actuelle</td>
+ <td width="25%" style="text-align: center;"><span id="idHActuelle">-- H -- mn</span></td>
+ <td width="20%" style="text-align: center;"><span id="idhautActuelle">--°</span></td>
+<td width="20%" style="text-align: center;"><span id="idazActuelle">---°</span></td>
+</tr>
+<tr>
+ <td width="35%" style="text-align: center;">lever</td>
+ <td width="25%" style="text-align: center;"><span id="idHLever">-- H -- mn</span></td>
+ <td width="20%" style="text-align: center;"><span id="idhautLever">--°</span></td>
+ <td width="20%" style="text-align: center;"><span id="idazLever">---°</span></td>
+</tr>
+<tr>
+ <td width="35%" style="text-align: center;">midi</td>
+ <td width="25%" style="text-align: center;"><span id="idHMidi">-- H -- mn</span></td>
+ <td width="20%" style="text-align: center;"><span id="idhautMidi">--°</span></td>
+ <td width="20%" style="text-align: center;"><span id="idazMidi">---°</span></td>
+</tr>
+<tr>
+ <td width="35%" style="text-align: center;">coucher</td>
+ <td width="25%" style="text-align: center;"><span id="idHCoucher">-- H -- mn</span></td>
+ <td width="20%" style="text-align: center;"><span id="idhautCoucher">--°</span></span></td>
+ <td width="20%" style="text-align: center;"><span id="idazCoucher">---°</span></span></td>
+</tr>
+</table>
+
+
+<img src="images/image_rose.png" width="200px"/>
+
+<hr />
+
+<!--          table 2         -->
+<span class="titre">Entrée manuelle des valeurs</span><br /><br />
+<table width="100%">
+<tr>
+<td width="50%" style="text-align: right;">
+  latitude <span class="petit">(+ nord , - sud)</span> :<br /> longitude <span class="petit">(+ est , - ouest)</span>:
+</td>
+<td width="50%" style="text-align: left;">
+<input type="number" name="texte" id="latM" maxlength="8" size="3" placeholder="&#177;00.000" ><br /> 
+<input type="number" name="number" id="longM" maxlength="8" size="3" placeholder="&#177;00.000"> 
+</td> 
+</tr>
+</table>
+<br />
+<button onClick="validCoordManuel()">localisation manuelle</button>  
+<br /><br />
+
+<table>
+<tr>
+jour : <input class="court" type="text" id="idjour" maxlength="2" placeholder="00" >
+mois : <input class="court" type="text" id="idmois" maxlength="2" size="3" placeholder="00" >
+GMT : <input class="court" type="text" id="idGMT" maxlength="3" size="3" placeholder="&#177;00" >
+<br />
+heure : <input class="court" type="text" id="idheure" maxlength="2" size="3" placeholder="00" >
+minute : <input class="court" type="text" id="idminute" maxlength="2" size="3" placeholder="00">
+</tr>
+</table>
+
+<br />
+<button onclick="setHLmanuelle()">date/heure manuelle</button> 
+<br />
+
+<hr />
+</div><!-- Making the table responsive -->
+
+<br />
+<a href="informations.html">informations complémentaires</a>
+<br><i><small>version 04/24<small></i>
+</body>
+</html>
