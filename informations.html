@@ -1,0 +1,119 @@
+<!-- <!DOCTYPE html> -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>cadrans</title>
+    
+<style>
+body {
+  text-align: left;
+  font-size: 20px;
+  line-height: 35px;
+}
+.gris{
+  background-color: #dddddd;
+  padding: 10px;
+}
+.centered{
+  text-align: center;
+}
+.left{
+  text-align: left;
+}
+em{
+  color: #444444;
+}
+.cg{ border: 1px solid black; border-radius: 5px; padding: 5px;font-weight: bold ; background-color: #cccccc ; color: #3399ff;}
+</style>
+</head>
+
+<body>
+  
+<div class="centered">
+<h2>informations sur l'utilisation de la page "CADRANS"</h2>
+<br /><br />
+<a href="index.html">retour vers la page "CADRANS"</a>
+</div>
+
+<div class='left'>
+<br />
+<h3>Utilisation de la page Cadrans</h3>
+La page "CADRANS" calcule et affiche les différents temps accessibles en un lieu donné:
+<ul>
+  <li><b>la date légale</b> du lieu</li>
+  <li><b>le temps UTC</b> "temps universel coordonné", qui est quasiment le temps solaire moyen du méridien de Greenwich<sup>1</sup></li>
+  
+  <li><b>l'heure légale</b> du lieu.</li>
+
+  <li><b>le temps solaire moyen</b> du lieu tel que défini par sa longitude</li>
+  <li><b>le temps solaire vrai du lieu</b> tel que défini par le temps solaire moyen du lieu et "l'équation du temps"</li>
+</ul>
+Les écarts entre ces différentes heures sont également indiqués:
+<ul>
+  <li><b>décalage GMT</b>, écart entre l'heure légale du lieu et l'heure UTC</li>
+  <li><b>Heure solaire moyenne / Heure légale</b> écart entre l'heure solaire moyenne du lieu et l'heure légale. Cet écart dépend du décalage GMT et de la longitude du lieu</li>
+  <li><b>équation du temps</b>, écart entre l'heure solaire moyenne et l'heure solaire vraie (indiquée par un cadran solaire). Cet écart varie au cours de l'année d'environ &#177; 15mn</li>
+</ul>
+Cette page calcule et affiche également les élément suivants liés aux positions du Soleil:
+<ul>
+  <li><b>position soleil actuel</b> :	hauteur et azimut du Soleil à l'heure courante affichée, et au lieu affiché </li>
+  <li><b>midi solaire</b>, heure légale du midi solaire, et hauteur du Soleil à ce moment</li>
+  <li><b>lever du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment </li>
+  <li><b>coucher du Soleil</b>, heure légale du lever du Soleil, et azimut du Soleil à ce moment</li>
+</ul>
+</div>
+<div>
+Le temps légal du lieu est automatiquement obtenu à partir de l'ordinateur, la tablette, ou le smartphone utilisé. Cette heure est très précise, si le système informatique utilisé est connecté sur internet. <br /><br />
+Les différents temps sont affichés par défaut en temps réel. Il est possible de "figer" le temps avec le bouton <span class="cg">temps réel/figé</span>. <br />Le temps est figé automatiquement lorsqu'une valeur (latitude, longitude, mois, jour, heure, minute) est entrée manuellement. <br />Lorsque le temps est figé un nouvel appui sur le bouton <span class="cg">temps réel/figé</span> permet de revenir au temps réel<br />
+<br />
+Une zone en fin de page permet de rentrer manuellement une date. Cela permet notamment de calculer la valeur des heures solaires à des dates différentes de la date actuelle.
+</div>
+<div>
+  <br />
+  Le temps solaire, moyen ou vrai, est lié à la longitude du lieu.
+  Pour obtenir celle-ci on peut soit le faire automatiquement à l'aide du bouton <span class="cg">localisation automatique</span>, ou manuellement en rentrant les coordonnées du lieu et en les validant à l'aide du bouton <span class="cg">localisation manuelle</span><br /><br />
+  A noter que :
+  <ul>
+  <li>tous les systèmes informatiques ne permettent pas d'accéder directement aux coordonnées du lieu (latitude et longitude). Dans le cas ou l'accès est possible le système vous demandera peut-être une autorisation, en fonction des paramètres de sécurité que vous avez définis</li>
+  <li>si vous rencontrez des difficultés avec la localisation automatique, vous pouvez utiliser la localisation manuelle. Les coordonnées d'un lieu particulier sont facilement accessibles en faisant une recherche sur un moteur de recherche (Google, Bing...)</li>
+  </ul>
+</div>
+<div>
+<br />
+  <h3>Quelques notions concernant les calculs de temps</h3><br />
+  Le temps est initialement défini par la rotation de la Terre sur elle-même d'une part, et la rotation de la Terre autour du Soleil d'autre part.
+  Pour plusieurs raisons <sup>2</sup>, la rotation de la Terre autour du Soleil ne se fait pas à vitesse constante. Cela fait que, si la durée du jour est bien <i>en moyenne</i> de 24H, elle varie au cours de l'année, d'environ &#177;16 mn. La formule qui permet de calculer cette variation pour un jour donné s'appelle <b>"équation du temps"</b>.<br />
+  Afin de faire correspondre le <i>temps des horloges</i> qui est "parfaitement" régulier <sup>3</sup>, avec ce <i>temps de la Terre</i>, qui varie, on a défini un <b>temps solaire moyen</b> qui est le temps solaire d’un lieu, correspondant à des journées solaires fictives régulières de 24h. Ce "temps solaire moyen" est à la base du système de temps "GMT", le temps solaire moyen sur le méridien de Greenwich.
+  <br />
+  Toujours du fait le l’irrégularité de la rotation de la Terre autour du Soleil, l'heure légale à laquelle, en un lieu donné, un cadran solaire indique midi, est variable au cours de l'année (d'environ &#177;16 mn comme précédemment indiqué). Cette <b>heure légale du midi solaire</b> est indiquée sur la page "CADRANS". On pourra expérimenter sa variation au cours de l'année en faisant varier la date manuellement.
+</div>
+
+<div>
+<br />
+  <h3>Quelques notions concernant la position du Soleil dans le ciel</h3><br />
+  L'azimut de lever et du coucher du Soleil varie au cours de l'année: il se lève parfaitement à l'est et se couche parfaitement à l'ouest lors des équinoxes de printemps et d'automne. Il se lève vers le sud-est et se couche vers le sud-ouest en hiver. Durant l'été son parcours apparent est plus long: il se lève vers le nord-est et se couche vers le nord-ouest.<br />
+  De la même façon, la hauteur du Soleil à midi varie au cours de l'année. Elle est maximale au solstice d'été et minimale au solstice d'hiver. Cette hauteur dépend aussi de la latitude du lieu. Ainsi, durant une partie plus ou moins longue de l'hiver, le Soleil ne se lève pas pour les latitudes au nord du cercle polaire arctique. Symétriquement le même phénomène se produit au sud du cercle polaire antartique durant l'été boréal.
+</div>
+
+<div>
+  <br />
+  <h3>Informations complémentaires</h3><br />
+Pour plus d'information sur les différents temps vous pouvez consulter la page wikipedia consacrée au <a href="https://fr.m.wikipedia.org/wiki/Temps_solaire#:~:text=Le%20temps%20solaire%20moyen%20est,au%20cours%20de%20la%20journée.">temps solaire</a> et celle consacrée à <a href="https://fr.m.wikipedia.org/wiki/%C3%89quation_du_temps">l'équation du temps</a>.<br /> Pour la position du Soleil des informations complémentaires sont disponibles sur la page <a href="https://fr.m.wikipedia.org/wiki/Position_du_Soleil">position du Soleil.</a>
+</div>
+<div>
+<br />
+<hr />
+(1) Le temps UTC et le temps solaire moyen de Greenwich peuvent se décaler d'une seconde. Un ajustement du temps UTC est régulierement fait pour le resynchroniser avec le temps GMT.<br />
+(2) L'orbite elliptique de la Terre autour du Soleil, et l'inclinaison de son axe de rotation par rapport au plan de l'écliptique.<br />
+(3) Cette régularité impressionante est permise par l'utilisation des horloges atomiques.
+
+<br /><br />
+<a href="https://github.com/creations56">creations56</a>, version 04/24 </br></br>
+<i>évolution 04/24 vs 12/23 : affichage des heures en temps réel par défaut. Possibilité de "figer" le temps. Ajout des écarts entre l'heure légale du lieu et l'heure UTC, entre l'heure solaire moyenne du lieu et l'heure légale, et entre l'heure solaire moyenne et l'heure solaire vraie (indiquée par un cadran solaire).</i><br />
+<i>évolution 12/23 vs 09/23 : correction d'un bug sur le calcul de la hauteur du Soleil correspondant à la position du Soleil actuel.</i><br>
+<i>évolution 09/23 vs 11/22 : ajout calcul hauteur et azimut courant du Soleil.</i>
+
+</div>
+</body>
+</html>
